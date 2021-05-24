@@ -1,0 +1,66 @@
+#연결포트 변경
+server:
+  port: 9999
+    
+#오라클연결
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/xe
+    username: singleproject
+    password: singleproject12
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: false
+    show-sql: true
+    database: oracle
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+
+    properties:
+      hibernate:
+        format_sql: true
+
+#jsp 설정
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+#mail설정
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: glddld4@gmail.com
+    password: rladlrwn89@
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+#파일업로드 설정
+  servlet:
+    multipart:
+      file-size-threshold: 50MB
+      #location: /uploadfiles
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+      resolve-lazily: true
+  output:
+    ansi:
+      enabled: always
+
+file:
+  upload-dir: /uploadfiles
+  
+
+logging:
+  level:
+    root: info
+  file:
+    #name: C:\Users\김익주\Documents/logs/log.txt
+    path: logs
+
