@@ -45,10 +45,7 @@ public class ReboardVO{
 	
 	private String delflag;
 	
-	@ManyToOne
-	@JoinColumn(name="userid")
-	private RegisterVO registerVo;
-	
+	private String userid;
 	
 	@OneToMany(mappedBy = "reboardVo")
 	private List<UpfileListVO> upfileList=new ArrayList<UpfileListVO>();

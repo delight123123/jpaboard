@@ -8,7 +8,7 @@ public interface ReboardRepository extends JpaRepository<ReboardVO, Long>{
 
 	public Page<ReboardVO> findByReboardTitleContaining(String reboardTitle, Pageable paging);
 	public Page<ReboardVO> findByReboardContentContaining(String reboardContent, Pageable paging);
-	public Page<ReboardVO> findByRegisterVoContaining(ReboardVO vo, Pageable paging);
-	//public Page<ReboardVO> findByUseridContaining(ReboardVO vo, Pageable paging);
-	
+	//public Page<ReboardVO> findByRegisterVoContaining(ReboardVO vo, Pageable paging);
+	public Page<ReboardVO> findByUseridContaining(String userid, Pageable paging);
+
 }

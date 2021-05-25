@@ -4,7 +4,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -37,9 +39,6 @@ public class RegisterVO{
 	private String adminauth;
 	
 	private Timestamp outDate;
-	
-	@OneToMany(mappedBy = "registerVo")
-	private List<ReboardVO> reboardList=new ArrayList<ReboardVO>();
 	
 	@OneToMany(mappedBy = "register")
 	private List<PaymentVO> paymentList=new ArrayList<PaymentVO>();
