@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Table(name = "tbl_user")
+@Table(name = "TBL_USER")
 @Entity
 public class RegisterVO{
 	@Id
@@ -36,12 +36,11 @@ public class RegisterVO{
 	
 	private String adminauth;
 	
-	@UpdateTimestamp
 	private Timestamp outDate;
 	
-	@OneToMany(mappedBy = "tbl_user")
+	@OneToMany(mappedBy = "registerVo")
 	private List<ReboardVO> reboardList=new ArrayList<ReboardVO>();
 	
-	@OneToMany(mappedBy = "tbl_payment")
+	@OneToMany(mappedBy = "register")
 	private List<PaymentVO> paymentList=new ArrayList<PaymentVO>();
 }

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.single.board.model.UpfileListVO;
+import com.single.jpaProjct.board.domain.UpfileListVO;
 
 @Component
 public class FileUploadUtil {

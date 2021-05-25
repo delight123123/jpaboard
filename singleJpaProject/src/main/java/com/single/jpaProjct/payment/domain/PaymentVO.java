@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Table(name = "tbl_payment")
+@Table(name = "TBL_PAYMENT")
 @Entity
 public class PaymentVO{
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,6 +40,6 @@ public class PaymentVO{
 	@JoinColumn(name = "userid")
 	private RegisterVO register;
 	
-	@OneToOne(mappedBy = "tbl_refund")
+	@OneToOne(mappedBy = "paymentVo")
 	private RefundVO refundVo;
 }

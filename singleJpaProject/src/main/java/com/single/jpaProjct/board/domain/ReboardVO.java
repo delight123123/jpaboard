@@ -14,14 +14,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+
+import com.single.jpaProjct.register.domain.RegisterVO;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Table(name = "tbl_reboard")
+@Table(name = "TBL_REBOARD")
 @Entity
 public class ReboardVO{
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +32,6 @@ public class ReboardVO{
 	
 	private String reboardContent;
 	
-	@UpdateTimestamp
 	@CreationTimestamp
 	private Timestamp reboardReg;
 	
@@ -47,12 +47,10 @@ public class ReboardVO{
 	
 	@ManyToOne
 	@JoinColumn(name="userid")
-	private ReboardVO reboardVO;
+	private RegisterVO registerVo;
 	
-	private int newImgTerm;
 	
-	@OneToMany
-	@JoinColumn(name = "file_no")
+	@OneToMany(mappedBy = "reboardVo")
 	private List<UpfileListVO> upfileList=new ArrayList<UpfileListVO>();
 	
 }

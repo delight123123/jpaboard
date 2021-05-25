@@ -1,5 +1,7 @@
 package com.single.jpaProjct.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.single.board.login.model.LoginService;
-import com.single.board.register.model.RegisterVO;
+import com.single.jpaProjct.register.domain.LoginService;
+import com.single.jpaProjct.register.domain.RegisterVO;
 
 
 @Controller
@@ -61,13 +63,13 @@ public class LoginController {
 			msg="비밀번호가 틀립니다.";
 			url="/login";
 		}else if(res==LoginService.LOGIN_OK) {
-			RegisterVO registerVo=loginService.userInfoByuserid(userid);
+			Optional<RegisterVO> registerVo=loginService.userInfo(userid);
 			
 			logger.info("로그인 유저 정보={}",registerVo);
 			
 			HttpSession session=request.getSession();
-			session.setAttribute("userid", registerVo.getUserid());
-			session.setAttribute("auth", registerVo.getAdminauth());
+			session.setAttribute("userid", registerVo.get().getUserid());
+			session.setAttribute("auth", registerVo.get().getAdminauth());
 			
 			Cookie ck=new Cookie("chk_userid", userid);
 			ck.setPath("/");
@@ -125,10 +127,11 @@ public class LoginController {
 			RegisterVO vo=new RegisterVO();
 			vo.setUserid(userid);
 			vo.setUserpw(cgPwd);
-			res=loginService.userPwCg(vo);
+			res=1;
+			loginService.userPwCg(vo);
 			logger.info("비밀번호 변경 결과 res={}",res);
 		}else if(login==LoginService.DISAGREE_PWD) {
-			
+
 		}
 		
 		

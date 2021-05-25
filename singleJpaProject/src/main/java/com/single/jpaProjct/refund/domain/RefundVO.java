@@ -39,7 +39,7 @@ public class RefundVO{
 	private Timestamp refundDate;
 	
 	@OneToOne
-	@JoinColumn(name = "payment_no")
+	@JoinColumn(name = "paymentNo")
 	private PaymentVO paymentVo;
 	
 	private String refundReason;

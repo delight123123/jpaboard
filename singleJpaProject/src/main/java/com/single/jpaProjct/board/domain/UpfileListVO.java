@@ -29,6 +29,6 @@ public class UpfileListVO {
 	private String originalFileName;
 	
 	@ManyToOne
-	@JoinColumn(name = "reboard_no")
+	@JoinColumn(name = "reboardNo")
 	private ReboardVO reboardVo;
 }

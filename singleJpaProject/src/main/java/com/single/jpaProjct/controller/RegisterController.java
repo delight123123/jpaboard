@@ -11,42 +11,41 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.single.board.register.model.RegisterServiceImpl;
-import com.single.board.register.model.RegisterVO;
-
-import lombok.extern.java.Log;
+import com.single.jpaProjct.register.domain.RegisterService;
+import com.single.jpaProjct.register.domain.RegisterVO;
 
 @Controller
-@Log
 public class RegisterController {
-	
+
 	private final static Logger logger=LoggerFactory.getLogger(RegisterController.class);
 	
 	@Autowired
-	private RegisterServiceImpl registerService;
-
+	RegisterService registerService;
+	
+	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public Object register() {
-		log.info("회원가입 화면");
+		logger.info("회원가입 화면");
 		
 		return "user/register";
 	}
 	
 	@RequestMapping("/register/idChk")
 	@ResponseBody
-	public int useridDuplChk(@RequestParam String useridChk) {
+	public long useridDuplChk(@RequestParam String useridChk) {
 		
 		logger.info("아이디 중복 확인 파라미터 useridChk={}",useridChk);
 		
-		int res=2;
+		long res=2;
 		
-		res=registerService.userIdChk(useridChk);
+		res=registerService.idchk(useridChk);
 		
 		logger.info("검색 결과 res={}",res);
 		
 		return res;
 		
 	}
+	
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public Object register(@ModelAttribute RegisterVO registerVo, @RequestParam(required = false) String email3
@@ -70,17 +69,9 @@ public class RegisterController {
 			}
 		}
 		
-		int res=registerService.userRegister(registerVo);
+		registerService.userRegister(registerVo);
 		
-		String msg="", url="";
-		
-		if(res>0) {
-			msg="회원가입이 완료되었습니다.";
-			url="/login";
-		}else {
-			msg="회원가입 실패";
-			url="/register";
-		}
+		String msg="회원가입이 완료되었습니다.", url="/login";
 		
 		model.addAttribute("url",url);
 		model.addAttribute("msg",msg);

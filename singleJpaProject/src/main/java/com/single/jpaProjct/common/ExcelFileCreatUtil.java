@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.single.board.register.model.RegisterVO;
+import com.single.jpaProjct.register.domain.RegisterVO;
 
 @Component
 public class ExcelFileCreatUtil {
