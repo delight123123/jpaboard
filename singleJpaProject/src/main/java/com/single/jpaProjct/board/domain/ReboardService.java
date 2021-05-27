@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.query.Procedure;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.single.jpaProjct.common.SearchVO;
@@ -71,5 +73,19 @@ public class ReboardService {
 	
 	public ReboardVO reboardSelByNo(int reboardNo) {
 		return reboardRepository.findById(reboardNo+0L).get();
+	}
+	
+	public int reboardDel(Long no,Long groupno,Long step) {
+		return reboardRepository.delProcedure(no, groupno, step);
+	}
+	
+	public UpfileListVO downCntUp(Long no) {
+		UpfileListVO vo=upfileListRepository.findById(no).get();
+		vo.setDownCount(vo.getDownCount()+1);
+		return upfileListRepository.save(vo);
+	}
+	
+	public UpfileListVO fileOneSel(Long no) {
+		return upfileListRepository.findById(no).get();
 	}
 }

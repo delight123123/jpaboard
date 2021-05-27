@@ -61,6 +61,8 @@ public class JpaProjectTest {
 		 * System.out.println("검색결과 개수="+results.getSize());
 		 * System.out.println("paging total"+results.getTotalPages());
 		 */
+		
+		
 	}
 	
 }
