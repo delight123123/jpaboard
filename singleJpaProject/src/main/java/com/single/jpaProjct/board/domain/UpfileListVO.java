@@ -8,12 +8,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @Table(name = "upfile_list")
+@ToString(exclude = "reboardVo")
 @Entity
 public class UpfileListVO {
 	
@@ -24,6 +28,7 @@ public class UpfileListVO {
 	
 	private long filesize;
 	
+	@ColumnDefault("0")
 	private int downCount;
 	
 	private String originalFileName;

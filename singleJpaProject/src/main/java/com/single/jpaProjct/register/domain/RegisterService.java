@@ -3,6 +3,8 @@ package com.single.jpaProjct.register.domain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.single.jpaProjct.common.SHA256Util;
+
 @Service
 public class RegisterService {
 
@@ -14,8 +16,15 @@ public class RegisterService {
 		return registerRepository.countByUserid(userid);
 	}
 	
-	public void userRegister(RegisterVO vo) {
-		registerRepository.save(vo);
+	public void userRegister(RegisterVO registerVo) {
+		String salt=SHA256Util.generateSalt();
+		registerVo.setSalt(salt);
+		String password=SHA256Util.getEncrypt(registerVo.getUserpw(), salt);
+		
+		registerVo.setUserpw(password);
+		
+		
+		registerRepository.save(registerVo);
 	}
 	
 }

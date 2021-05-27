@@ -6,7 +6,7 @@
 	<div class="card">
 		<div class="card-body">
 		<div>
-            <form name="write" id="fileform" method="post" action="" enctype="multipart/form-data">
+            <form name="write" id="fileform" method="post" enctype="multipart/form-data"  action="<c:url value='/boardWrite'/>">
 				<fieldset>
 					<div id="aa">
 						<label for="title" >제목</label>
@@ -17,14 +17,10 @@
 						<textarea id="content" name="reboardContent" rows="12" cols="40" class="form-control form-control-fw"></textarea>
 					</div>
 					<div id="lastdiv">
-						<button type="button" class="btn btn-gradient-danger btn-rounded btn-fw" id="bfsub">작성완료</button>
+						<button type="submit" class="btn btn-gradient-danger btn-rounded btn-fw" id="bfsub">작성완료</button>
 					</div>
-				</fieldset>
-			</form>
-		</div>
-		<form id="upfileform" method="post" action="" enctype="multipart/form-data">
-		<fieldset>
-			<input type="text" id="insertno" name="insertno">
+
+					<input type="text" id="insertno" name="insertno">
 					<div id="divdiv2">
 						<label for="">첨부파일</label>
 						<input type="button" name="add" id="add" value="+"><input type="button" name="minus" id="minus" value="-">
@@ -33,8 +29,10 @@
 						
 						
 					</div>
-					</fieldset>
-		</form>
+				</fieldset>
+			</form>
+		</div>
+
 		
 		</div>
 	</div>
@@ -137,7 +135,7 @@ position: fixed;
 
 
 <script type="text/javascript">
-function fileup(result) {
+/* function fileup(result) {
 	$("#overray").css("display","block");
 	$("#overray").css("height","100%");
 	var formdata = new FormData($('#upfileform')[0]);
@@ -145,10 +143,10 @@ function fileup(result) {
 	
 	$.ajax({
 		type: "POST", 
+	    enctype: 'multipart/form-data',
 		url:"<c:url value='/fileuplod'/>",
 		data: formdata,
 		processData: false,
-		dataType : "json",
 		contentType: false,
 		async    : false,
 		success:function(){
@@ -159,7 +157,7 @@ function fileup(result) {
 			alert("Error : "+status+", "+error);
 		}
 	})
-};
+}; */
 
 
 $(function() {
@@ -169,7 +167,7 @@ $(function() {
 	
 	$("#mainBoard").addClass("active");
 
-	$("#bfsub").click(function() {
+	/* $("#bfsub").click(function() {
 
 			$.ajax({
 				url:"<c:url value='/boardWrite'/>",
@@ -178,7 +176,7 @@ $(function() {
 				success:function(res){
 					alert("글등록");
 					$("#insertno").val(res);
-					if($("#divdiv2>input[type=file]").val()){
+					if(!$("#divdiv2>input[type=file]").val()){
 						fileup(res);
 					}
 					location.href="<c:url value='/main'/>";
@@ -192,17 +190,17 @@ $(function() {
 			
 			});
 		
-	});
+	}); */
 	
 	
 	
 	$("#add").click(function() {
 			if(i==1){
-				$("#frtfilediv").append('<div id="sndfilediv">2. <input type="file" name="upfile1" id="upfile" class="form-control form-control-fw"> </div>');
+				$("#frtfilediv").append('<div id="sndfilediv">2. <input type="file" name="upfile2" id="upfile" class="form-control form-control-fw"> </div>');
 				$("#minus").show();
 				i=2;
 			}else if(i==2){
-				$("#sndfilediv").append('<div id="thdfilediv">3. <input type="file" name="upfile1" id="upfile" class="form-control form-control-fw"> </div>');
+				$("#sndfilediv").append('<div id="thdfilediv">3. <input type="file" name="upfile3" id="upfile" class="form-control form-control-fw"> </div>');
 				i=3;
 				$("#add").hide();
 			}

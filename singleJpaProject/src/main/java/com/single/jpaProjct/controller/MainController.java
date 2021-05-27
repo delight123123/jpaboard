@@ -1,14 +1,63 @@
 package com.single.jpaProjct.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.single.jpaProjct.board.domain.ReboardService;
+import com.single.jpaProjct.board.domain.ReboardVO;
+import com.single.jpaProjct.common.PaginationInfo;
+import com.single.jpaProjct.common.SearchVO;
+import com.single.jpaProjct.common.Utility;
 
 @Controller
 public class MainController {
 
 	private Logger logger=LoggerFactory.getLogger(LoginController.class);
 	
+	@Autowired
+	private ReboardService reboardService;
 	
+	
+	@RequestMapping("/main")
+	public Object mainHome(@ModelAttribute SearchVO searchVo,
+			Model model) {
+		logger.info("메인화면 보이기");
+		logger.info("파라미터 searchVo={}",searchVo);
+		
+		Page<ReboardVO> page=reboardService.mainSel(searchVo);
+		
+		List<ReboardVO> list=page.getContent().stream()
+				.collect(Collectors.toList());
+		PaginationInfo pagingInfo=new PaginationInfo();
+		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		
+		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		
+		int totalRecord=page.getTotalPages();
+		logger.info("totalRecord={}",totalRecord);
+		
+		pagingInfo.setTotalRecord(totalRecord);
+		
+		logger.info("pagingInfo={}",pagingInfo);
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
+		
+		
+		return "Main";
+	}
 	
 }

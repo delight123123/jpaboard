@@ -1,6 +1,8 @@
 package com.single.jpaProjct;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +40,7 @@ public class JpaProjectTest {
 	@Test
 	public void useridSel() {
 		Optional<RegisterVO> op=registerRepository.findOneByUserid("glddld");
-		System.out.println(op.get().getUserid());
+		System.out.println(op.isEmpty());
 	}
 	
 	@Transactional
@@ -51,9 +53,14 @@ public class JpaProjectTest {
 		//vo2.setRegisterVo(op.get());
 
 		//Page<ReboardVO> results=reboardRepository.findByRegisterVoContaining(vo2, paging);
-		Page<ReboardVO> results=reboardRepository.findByUseridContaining("glddld", paging);
-		System.out.println("검색결과 개수="+results.getSize());
-		System.out.println("paging total"+results.getTotalPages());
+		/*
+		 * Page<ReboardVO> results=reboardRepository.findByUseridContaining("glddld",
+		 * paging); List<ReboardVO> list=results.getContent().stream()
+		 * .collect(Collectors.toList());
+		 * System.out.println("list.size()="+list.size());
+		 * System.out.println("검색결과 개수="+results.getSize());
+		 * System.out.println("paging total"+results.getTotalPages());
+		 */
 	}
 	
 }

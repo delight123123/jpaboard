@@ -7,13 +7,13 @@ spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521/xe
-    username: singleproject
-    password: singleproject12
+    username: jpastudy
+    password: jpastudy12
 
   jpa:
     hibernate:
       ddl-auto: update
-    generate-ddl: false
+    generate-ddl: true
     show-sql: true
     database: oracle
     database-platform: org.hibernate.dialect.Oracle10gDialect
@@ -21,6 +21,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        jdbc.batch_size: 5
+        order_inserts: true
+
 
 #jsp 설정
   mvc:

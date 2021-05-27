@@ -20,7 +20,7 @@ public class RegisterController {
 	private final static Logger logger=LoggerFactory.getLogger(RegisterController.class);
 	
 	@Autowired
-	RegisterService registerService;
+	private RegisterService registerService;
 	
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
