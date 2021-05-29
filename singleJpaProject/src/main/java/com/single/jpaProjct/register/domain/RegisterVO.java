@@ -49,6 +49,8 @@ public class RegisterVO{
 			fetch = FetchType.LAZY)
 	private List<ReboardVO> reboardList;
 	
-	@OneToMany(mappedBy = "register")
+	@OneToMany(mappedBy = "register",
+			cascade = CascadeType.ALL,
+			fetch = FetchType.LAZY)
 	private List<PaymentVO> paymentList=new ArrayList<PaymentVO>();
 }

@@ -7,12 +7,14 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.single.jpaProjct.register.domain.RegisterVO;
+
 public interface ReboardRepository extends JpaRepository<ReboardVO, Long>{
 
 	public Page<ReboardVO> findByReboardTitleContaining(String reboardTitle, Pageable paging);
 	public Page<ReboardVO> findByReboardContentContaining(String reboardContent, Pageable paging);
 	//public Page<ReboardVO> findByRegisterVoContaining(ReboardVO vo, Pageable paging);
-	//public Page<ReboardVO> findByUseridContaining(String userid, Pageable paging);
+	public Page<ReboardVO> findAllByRegisterVo(RegisterVO vo, Pageable paging);
 	@Transactional
 	@Procedure(procedureName = "delete_reboard")
 	public int delProcedure(@Param("p_no") Long no

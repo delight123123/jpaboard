@@ -4,7 +4,7 @@
 <form action="<c:url value='/paymentList'/>" 
 	name="frmPage" method="post">
 	<input type="hidden" name="searchCondition" 
-		value="payment_reg" id="aa1">
+		value="paymentReg" id="aa1">
 	<input type="hidden" name="searchKeyword" 
 		value="${param.searchKeyword}" id="aa2">
 	<input type="hidden" name="currentPage" value="${pagingInfo.currentPage }"  id="aa3">

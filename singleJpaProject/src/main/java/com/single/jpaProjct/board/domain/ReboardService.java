@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.single.jpaProjct.common.SearchVO;
 import com.single.jpaProjct.common.Utility;
+import com.single.jpaProjct.register.domain.RegisterVO;
 
 @Service
 public class ReboardService {
@@ -42,7 +43,9 @@ public class ReboardService {
 			}else if(condition.equals("reboard_content")) {
 				page=reboardRepository.findByReboardContentContaining(keyWord, paging);
 			}else if(condition.equals("userid")) {
-				
+				RegisterVO vo=new RegisterVO();
+				vo.setUserid(keyWord);
+				page=reboardRepository.findAllByRegisterVo(vo, paging);
 			}
 		}
 		

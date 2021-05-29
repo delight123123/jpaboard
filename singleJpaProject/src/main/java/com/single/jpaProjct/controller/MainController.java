@@ -45,7 +45,7 @@ public class MainController {
 		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		int totalRecord=page.getTotalPages();
+		int totalRecord=page.getTotalPages()*page.getSize();
 		logger.info("totalRecord={}",totalRecord);
 		
 		pagingInfo.setTotalRecord(totalRecord);

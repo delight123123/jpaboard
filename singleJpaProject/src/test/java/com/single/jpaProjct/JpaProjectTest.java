@@ -53,14 +53,16 @@ public class JpaProjectTest {
 		//vo2.setRegisterVo(op.get());
 
 		//Page<ReboardVO> results=reboardRepository.findByRegisterVoContaining(vo2, paging);
-		/*
-		 * Page<ReboardVO> results=reboardRepository.findByUseridContaining("glddld",
-		 * paging); List<ReboardVO> list=results.getContent().stream()
-		 * .collect(Collectors.toList());
-		 * System.out.println("list.size()="+list.size());
-		 * System.out.println("검색결과 개수="+results.getSize());
-		 * System.out.println("paging total"+results.getTotalPages());
-		 */
+
+		RegisterVO reVo=new RegisterVO();
+		reVo.setUserid("glddld");
+		
+		Page<ReboardVO> results = reboardRepository.findAllByRegisterVo(reVo, paging);
+		List<ReboardVO> list = results.getContent().stream().collect(Collectors.toList());
+		System.out.println("list.size()=" + list.size());
+		System.out.println("검색결과 개수=" + results.getSize());
+		System.out.println("paging total" + results.getTotalPages());
+		 
 		
 		
 	}

@@ -4,7 +4,7 @@
 <form action="<c:url value='/refundList'/>" 
 	name="frmPage" method="post">
 	<input type="hidden" name="searchCondition" 
-		value="reporting_date" id="aa1">
+		value="reportingDate" id="aa1">
 	<input type="hidden" name="searchKeyword" 
 		value="${param.searchKeyword}" id="aa2">
 	<input type="hidden" name="currentPage" value="${pagingInfo.currentPage }"  id="aa3">

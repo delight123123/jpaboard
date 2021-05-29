@@ -2,7 +2,9 @@ package com.single.jpaProjct.payment.domain;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,12 +36,14 @@ public class PaymentVO{
 	private int price;
 	
 	@CreationTimestamp
-	private Timestamp payment_reg;
+	private Timestamp paymentReg;
 	
 	@ManyToOne
 	@JoinColumn(name = "userid")
 	private RegisterVO register;
 	
-	@OneToOne(mappedBy = "paymentVo")
+	@OneToOne(mappedBy = "paymentVo",
+			cascade = CascadeType.ALL,
+			fetch = FetchType.LAZY)
 	private RefundVO refundVo;
 }

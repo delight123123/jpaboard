@@ -35,7 +35,6 @@ public class RefundVO{
 	
 	private String refundState;
 	
-	@UpdateTimestamp
 	private Timestamp refundDate;
 	
 	@OneToOne
