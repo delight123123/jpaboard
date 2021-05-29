@@ -33,7 +33,7 @@ public class ReboardService {
 		=PageRequest.of(searchVo.getCurrentPage(),Utility.BLOCK_SIZE 
 				,  Sort.Direction.DESC, "reboardNo");
 
-		Page<ReboardVO> page=null;
+		Page<ReboardVO> page=Page.empty();
 		
 		if(keyWord.isEmpty() || keyWord==null) {
 			page=reboardRepository.findAll(paging);

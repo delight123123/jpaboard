@@ -43,7 +43,7 @@ public class RefundService {
 		Pageable paging = PageRequest.of(searchVo.getCurrentPage(), 
 				Utility.BLOCK_SIZE, Sort.Direction.DESC, "refundNo");
 
-		Page<RefundVO> page = null;
+		Page<RefundVO> page = Page.empty();
 		
 		if(keyword.isEmpty() || keyword==null) {
 			page=refundRepository.findAll(paging);

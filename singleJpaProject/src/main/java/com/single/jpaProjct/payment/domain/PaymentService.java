@@ -29,7 +29,7 @@ public class PaymentService {
 		=PageRequest.of(searchVo.getCurrentPage(),Utility.BLOCK_SIZE 
 				,  Sort.Direction.DESC, "paymentNo");
 
-		Page<PaymentVO> page=null;
+		Page<PaymentVO> page=Page.empty();
 		
 		if(keyword.isEmpty() || keyword==null) {
 			DateTimeFormatter dtf=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

@@ -11,6 +11,7 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,11 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.single.board.register.model.MemberListVO;
 import com.single.jpaProjct.common.ExcelFileCreatUtil;
 import com.single.jpaProjct.common.PaginationInfo;
 import com.single.jpaProjct.common.SearchVO;
 import com.single.jpaProjct.common.Utility;
+import com.single.jpaProjct.register.domain.MemberListVO;
 import com.single.jpaProjct.register.domain.RegisterService;
 import com.single.jpaProjct.register.domain.RegisterVO;
 
@@ -43,7 +44,7 @@ public class UserManagementController {
 			,HttpSession session) {
 		logger.info("회원 관리 페이지 파라미터 searchVo={}",searchVo);
 		String userid=(String) session.getAttribute("userid");
-		registerVo.setUserid(userid);
+		Page<RegisterVO> noneWDWUser=registerService.useridManager(userid, Utility.NONEWDWTYPE, searchVo);
 		//비탈퇴 회원
 		PaginationInfo pagingInfo=new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.ANNBLOCK_SIZE);
@@ -53,14 +54,13 @@ public class UserManagementController {
 		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		int noneTotal=registerService.noneWithdrawalTotal(registerVo);
+		int noneTotal=noneWDWUser.getTotalPages()*noneWDWUser.getSize();
 		
 		pagingInfo.setTotalRecord(noneTotal);
 		
 		logger.info("비탈퇴 total={}",noneTotal);
-		logger.info("비탈퇴 세팅 memberVo={}",registerVo);
 		
-		List<RegisterVO> list=registerService.noneWithdrawal(registerVo);
+		List<RegisterVO> list=noneWDWUser.getContent();
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
 		
@@ -73,13 +73,14 @@ public class UserManagementController {
 		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT);
 		searchVo.setFirstRecordIndex2(pagingInfo2.getFirstRecordIndex());
 		
-		int total=registerService.withdrawalTotal(registerVo);
+		Page<RegisterVO> WDWUser=registerService.useridManager(userid, Utility.WDWTYPE, searchVo);
+		
+		int total=WDWUser.getTotalPages()*WDWUser.getSize();
 		
 		pagingInfo2.setTotalRecord(total);
 		logger.info("탈퇴회원 total={}",total);
-		logger.info("탈퇴회원 세팅 memberVo={}",registerVo);
 		
-		List<RegisterVO> list2=registerService.withdrawal(registerVo);
+		List<RegisterVO> list2=WDWUser.getContent();
 		
 		model.addAttribute("list2", list2);
 		model.addAttribute("pagingInfo2", pagingInfo2);
