@@ -35,8 +35,7 @@ public class MainController {
 		
 		Page<ReboardVO> page=reboardService.mainSel(searchVo);
 		
-		List<ReboardVO> list=page.getContent().stream()
-				.collect(Collectors.toList());
+		List<ReboardVO> list=page.getContent().stream().collect(Collectors.toList());
 		PaginationInfo pagingInfo=new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
 		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT);
@@ -45,14 +44,16 @@ public class MainController {
 		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		int totalRecord=page.getTotalPages()*page.getSize();
+		int totalRecord=(int) page.getTotalElements();
 		logger.info("totalRecord={}",totalRecord);
 		
 		pagingInfo.setTotalRecord(totalRecord);
 		
 		logger.info("pagingInfo={}",pagingInfo);
 		
-		
+		logger.info("list={}",list.toString());
+		logger.info("list.size()={}",list.size());
+		logger.info("list.userid={}",list.get(0).getRegisterVo().getUserid());
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
 		

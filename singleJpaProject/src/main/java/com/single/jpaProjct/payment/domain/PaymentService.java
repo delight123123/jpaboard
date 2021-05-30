@@ -36,7 +36,7 @@ public class PaymentService {
 			LocalDateTime start=LocalDateTime.parse(keyword+"00:00:00", dtf);
 			LocalDateTime end=LocalDateTime.parse(keyword+"23:59:59", dtf);
 			
-			page=paymentRepository.findAllByRegisterVoAndByPaymentRegBetween(vo,
+			page=paymentRepository.findAllByRegisterVoAndPaymentRegBetween(vo,
 					Timestamp.valueOf(start), Timestamp.valueOf(end),
 					paging);
 		}else {

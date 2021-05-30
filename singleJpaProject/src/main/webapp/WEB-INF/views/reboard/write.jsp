@@ -20,7 +20,7 @@
 						<button type="submit" class="btn btn-gradient-danger btn-rounded btn-fw" id="bfsub">작성완료</button>
 					</div>
 
-					<input type="text" id="insertno" name="insertno">
+					<input type="hidden" id="insertno" name="insertno">
 					<div id="divdiv2">
 						<label for="">첨부파일</label>
 						<input type="button" name="add" id="add" value="+"><input type="button" name="minus" id="minus" value="-">

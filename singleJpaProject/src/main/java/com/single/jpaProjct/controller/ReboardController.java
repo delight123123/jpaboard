@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.single.jpaProjct.board.domain.ReboardService;
@@ -49,7 +48,7 @@ public class ReboardController {
 	
 	//@ResponseBody
 	@RequestMapping("/boardWrite")
-	public Object boardWrite(@ModelAttribute ReboardVO vo,HttpSession session,MultipartHttpServletRequest request,
+	public Object boardWrite(@ModelAttribute ReboardVO vo,HttpSession session,HttpServletRequest request,
 			Model model) {
 		int res=0;
 		String userid=(String) session.getAttribute("userid");
@@ -75,13 +74,13 @@ public class ReboardController {
 				logger.info("upfileList insert결과 insertRes={}",insertRes.size());
 			}
 			
-			String msg="", url="";
-			msg="게시글 등록 완료";
-			url="/main";
-			model.addAttribute("msg", msg);
-			model.addAttribute("url", url);
+			
 		}
-		
+		String msg="", url="";
+		msg="게시글 등록 완료";
+		url="/main";
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
 		
 		return "common/message";
 	}
@@ -160,7 +159,7 @@ public class ReboardController {
 	
 	@RequestMapping("/boardUpdate")
 	public Object reboardEdit(@ModelAttribute ReboardVO reboardVo,
-			MultipartHttpServletRequest request,HttpSession session,
+			HttpServletRequest request,HttpSession session,
 			Model model) {
 		int res=0;
 		

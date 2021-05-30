@@ -18,6 +18,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import com.single.jpaProjct.register.domain.RegisterVO;
 
@@ -29,6 +31,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @Table(name = "TBL_REBOARD")
 @ToString(exclude = "registerVo")
+@DynamicInsert
+@DynamicUpdate
 @Entity
 public class ReboardVO{
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)

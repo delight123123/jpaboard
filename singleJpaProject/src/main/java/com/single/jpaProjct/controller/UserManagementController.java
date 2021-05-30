@@ -54,7 +54,7 @@ public class UserManagementController {
 		searchVo.setRecordCountPerPage(Utility.RECORD_COUNT);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		
-		int noneTotal=noneWDWUser.getTotalPages()*noneWDWUser.getSize();
+		int noneTotal=(int) noneWDWUser.getTotalElements();
 		
 		pagingInfo.setTotalRecord(noneTotal);
 		
@@ -75,7 +75,7 @@ public class UserManagementController {
 		
 		Page<RegisterVO> WDWUser=registerService.useridManager(userid, Utility.WDWTYPE, searchVo);
 		
-		int total=WDWUser.getTotalPages()*WDWUser.getSize();
+		int total=(int) WDWUser.getTotalElements();
 		
 		pagingInfo2.setTotalRecord(total);
 		logger.info("탈퇴회원 total={}",total);

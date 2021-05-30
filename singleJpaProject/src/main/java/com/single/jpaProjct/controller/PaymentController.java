@@ -103,7 +103,7 @@ public class PaymentController {
 		List<PaymentVO> list=page.getContent();
 		logger.info("검색결과 list.size()={}",list.size());
 		
-		int totalRecord=page.getTotalPages()*page.getSize();
+		int totalRecord=(int) page.getTotalElements();
 		logger.info("totalRecord={}",totalRecord);
 		
 		pagingInfo.setTotalRecord(totalRecord);
@@ -135,7 +135,7 @@ public class PaymentController {
 		registerVo.setUserid(userid);
 		
 		vo.setImpUid(impuid);
-		vo.setRegister(registerVo);
+		vo.setRegisterVo(registerVo);
 		vo.setOrdername(ordername);
 		vo.setPrice(price);
 		

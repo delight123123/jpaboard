@@ -11,7 +11,7 @@
 			<span class="sp1">제목</span> <span>${vo.reboardTitle}</span>
 		</div>
 		<div>
-			<span class="sp1">작성자</span> <span>${vo.userid}</span>
+			<span class="sp1">작성자</span> <span>${vo.registerVo.userid}</span>
 		</div>
 		<div>
 			<span class="sp1">등록일</span> <span>${vo.reboardReg}</span>
@@ -40,11 +40,11 @@
 		</div>
 
 		<div class="text-center">
-		<c:if test="${sessionScope.userid==vo.userid  }">
+		<c:if test="${sessionScope.userid==vo.registerVo.userid  }">
 			<a href
 			='<c:url value="/edit?no=${param.reboardNo}"/>'>수정</a> |
 		</c:if>
-		<c:if test="${sessionScope.userid==vo.userid || sessionScope.auth=='Y'  }">
+		<c:if test="${sessionScope.userid==vo.registerVo.userid || sessionScope.auth=='Y'  }">
         	<a id="delA" href
         	='#'>삭제</a> |
 		</c:if>

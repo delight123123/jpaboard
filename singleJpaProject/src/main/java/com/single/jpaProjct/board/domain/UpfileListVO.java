@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +20,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @Table(name = "upfile_list")
 @ToString(exclude = "reboardVo")
+@DynamicInsert
+@DynamicUpdate
 @Entity
 public class UpfileListVO {
 	

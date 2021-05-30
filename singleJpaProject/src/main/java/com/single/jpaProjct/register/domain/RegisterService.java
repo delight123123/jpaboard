@@ -50,12 +50,12 @@ public class RegisterService {
 			=PageRequest.of(searchVo.getCurrentPage(),Utility.BLOCK_SIZE 
 					,  Sort.Direction.DESC, "userid");
 			
-			page=registerRepository.findByUseridNotAndByOutDateNull(userid, paging);
+			page=registerRepository.findByUseridNotAndOutDateNull(userid, paging);
 		}else if(type==Utility.WDWTYPE) {
 			Pageable paging
 			=PageRequest.of(searchVo.getCurrentPage2(),Utility.BLOCK_SIZE 
 					,  Sort.Direction.DESC, "userid");
-			page=registerRepository.findByUseridNotAndByOutDateNotNull(userid, paging);
+			page=registerRepository.findByUseridNotAndOutDateNotNull(userid, paging);
 		}
 		
 		return page;

@@ -12,6 +12,6 @@ public interface RegisterRepository extends JpaRepository<RegisterVO, String>{
 	public long countByUserid(String userid);
 	public Optional<RegisterVO> findOneByUserid(String userid);
 	public List<RegisterVO> findOneByUserid(String userid,Pageable paging);
-	public Page<RegisterVO> findByUseridNotAndByOutDateNull(String userid, Pageable paging);
-	public Page<RegisterVO> findByUseridNotAndByOutDateNotNull(String userid, Pageable paging);
+	public Page<RegisterVO> findByUseridNotAndOutDateNull(String userid, Pageable paging);
+	public Page<RegisterVO> findByUseridNotAndOutDateNotNull(String userid, Pageable paging);
 }

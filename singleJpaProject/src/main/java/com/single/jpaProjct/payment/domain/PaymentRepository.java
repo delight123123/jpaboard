@@ -12,7 +12,7 @@ import com.single.jpaProjct.register.domain.RegisterVO;
 public interface PaymentRepository extends JpaRepository<PaymentVO, Long>{
 
 	public Page<PaymentVO> findAllByRegisterVo(RegisterVO vo, Pageable paging);
-	public Page<PaymentVO> findAllByRegisterVoAndByPaymentRegBetween(RegisterVO vo,
+	public Page<PaymentVO> findAllByRegisterVoAndPaymentRegBetween(RegisterVO register,
 			Timestamp startReg,Timestamp endReg ,Pageable paging);
 	public Optional<PaymentVO> findByImpUid(String impUid);
 	

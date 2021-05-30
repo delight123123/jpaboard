@@ -42,7 +42,7 @@ pageEncoding="UTF-8"%> <%@include file="inc/mainTop.jsp" %>
 								<c:if test="${vo.delflag=='Y' }">
 									<td>${vo.reboardNo}</td>
 									<td style="text-align: left; color: gray;">삭제된 글입니다.</td>
-									<td>${vo.userid}</td>
+									<td>${vo.registerVo.userid}</td>
 									<td><fmt:formatDate value="${vo.reboardReg }"
 											pattern="yyyy-MM-dd" /></td>
 									<td>${vo.readcount}</td>
@@ -82,11 +82,11 @@ pageEncoding="UTF-8"%> <%@include file="inc/mainTop.jsp" %>
 									${vo.reboardTitle}
 								</c:if>
 									</a> <!-- 24시간 이내의 글인 경우 new 이미지 보여주기 --> <c:if
-											test="${vo.newImgTerm<24 }">
+											test="">
 											<img src="<c:url value='/resources/images/new.gif'/>"
 												alt="new 이미지">
 										</c:if></td>
-									<td>${vo.userid}</td>
+									<td>${vo.registerVo.userid}</td>
 									<td><fmt:formatDate value="${vo.reboardReg }"
 											pattern="yyyy-MM-dd" /></td>
 									<td>${vo.readcount}</td>

@@ -8,12 +8,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import com.single.jpaProjct.board.domain.ReboardVO;
 import com.single.jpaProjct.payment.domain.PaymentVO;
@@ -26,6 +26,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @Table(name = "TBL_USER")
 @ToString(exclude = "reboardList")
+@DynamicInsert
+@DynamicUpdate
 @Entity
 public class RegisterVO{
 	@Id
@@ -49,7 +51,7 @@ public class RegisterVO{
 			fetch = FetchType.LAZY)
 	private List<ReboardVO> reboardList;
 	
-	@OneToMany(mappedBy = "register",
+	@OneToMany(mappedBy = "registerVo",
 			cascade = CascadeType.ALL,
 			fetch = FetchType.LAZY)
 	private List<PaymentVO> paymentList=new ArrayList<PaymentVO>();

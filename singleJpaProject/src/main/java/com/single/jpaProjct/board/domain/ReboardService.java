@@ -30,7 +30,7 @@ public class ReboardService {
 		String keyWord=searchVo.getSearchKeyword();
 		
 		Pageable paging
-		=PageRequest.of(searchVo.getCurrentPage(),Utility.BLOCK_SIZE 
+		=PageRequest.of(searchVo.getCurrentPage(),Utility.RECORD_COUNT 
 				,  Sort.Direction.DESC, "reboardNo");
 
 		Page<ReboardVO> page=Page.empty();

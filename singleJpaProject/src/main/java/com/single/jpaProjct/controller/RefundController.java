@@ -65,7 +65,7 @@ public class RefundController {
 		List<RefundVO> list=page.stream().collect(Collectors.toList());
 		logger.info("검색결과 list.size()={}",list.size());
 		
-		int totalRecord=page.getTotalPages()*page.getSize();
+		int totalRecord=(int) page.getTotalElements();
 		logger.info("totalRecord={}",totalRecord);
 		
 		pagingInfo.setTotalRecord(totalRecord);

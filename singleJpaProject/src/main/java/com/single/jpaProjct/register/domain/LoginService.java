@@ -18,15 +18,17 @@ public class LoginService {
 	RegisterRepository registerRepository;
 	
 	public int userLogin(String userid,String userpw) {
-		System.out.println(userid);
-		String salt=registerRepository.findOneByUserid(userid).get().getSalt();
-		String pwByuserid=registerRepository.findOneByUserid(userid).get().getUserpw();
-		System.out.println(salt);
+
+		Optional<RegisterVO> op=registerRepository.findOneByUserid(userid);
+		
 		int result=0;
 		
-		if(salt==null||salt.isEmpty()) {
+		if(!op.isPresent()) {
 			result=NONE_USERID;
 		}else {
+			String salt=registerRepository.findOneByUserid(userid).get().getSalt();
+			String pwByuserid=registerRepository.findOneByUserid(userid).get().getUserpw();
+			
 			String pw=SHA256Util.getEncrypt(userpw, salt);
 			System.out.println("pw="+pw);
 			if(pw.equals(pwByuserid)) {

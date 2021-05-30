@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import com.single.jpaProjct.refund.domain.RefundVO;
 import com.single.jpaProjct.register.domain.RegisterVO;
@@ -24,6 +26,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Table(name = "TBL_PAYMENT")
+@DynamicInsert
+@DynamicUpdate
 @Entity
 public class PaymentVO{
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,7 +44,7 @@ public class PaymentVO{
 	
 	@ManyToOne
 	@JoinColumn(name = "userid")
-	private RegisterVO register;
+	private RegisterVO registerVo;
 	
 	@OneToOne(mappedBy = "paymentVo",
 			cascade = CascadeType.ALL,

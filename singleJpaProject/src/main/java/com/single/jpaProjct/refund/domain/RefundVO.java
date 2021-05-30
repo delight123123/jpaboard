@@ -11,7 +11,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import com.single.jpaProjct.payment.domain.PaymentVO;
 
@@ -21,6 +22,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Table(name = "tbl_refund")
+@DynamicInsert
+@DynamicUpdate
 @Entity
 public class RefundVO{
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
