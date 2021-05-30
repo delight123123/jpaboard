@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%> <%@include file="inc/mainTop.jsp" %>
 		value="${pagingInfo.currentPage }" id="aa3">
 
 </form>
-
+<c:set var="toDay" value="<%=new java.util.Date()%>"/>
 
 <div class="content-wrapper">
 	<div class="card">
@@ -81,8 +81,13 @@ pageEncoding="UTF-8"%> <%@include file="inc/mainTop.jsp" %>
 								</c:if> <c:if test="${fn:length(vo.reboardTitle)<=30}">
 									${vo.reboardTitle}
 								</c:if>
-									</a> <!-- 24시간 이내의 글인 경우 new 이미지 보여주기 --> <c:if
-											test="">
+									</a> <!-- 24시간 이내의 글인 경우 new 이미지 보여주기 --> 
+									<fmt:parseDate var="toDay_D"  value="${toDay }" pattern="yyyy-MM-dd"/>
+									<fmt:parseDate var="regDay_D" value="${vo.reboardReg }"  pattern="yyyy-MM-dd"/>
+									<fmt:parseNumber var="toDay_N" value="${toDay_D.time / (1000*60*60*24)}" integerOnly="true" />
+									<fmt:parseNumber var="regDay_N" value="${regDay_D.time / (1000*60*60*24)}" integerOnly="true" /> 
+									<c:if
+											test="${(today_N - regDay_N)<24 }">
 											<img src="<c:url value='/resources/images/new.gif'/>"
 												alt="new 이미지">
 										</c:if></td>

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.single.jpaProjct.board.domain.ReboardService;
 import com.single.jpaProjct.board.domain.ReboardVO;
@@ -59,6 +61,26 @@ public class MainController {
 		
 		
 		return "Main";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/fileimg")
+	public long fileimg(@RequestParam("reboardNo") Long reboardNo) {
+		long res=0;
+		logger.info("파일 이미지 유무 파라미터 reboardNo={}",reboardNo);
+		
+		res=reboardService.fileimg(reboardNo);
+		
+		logger.info("게시물 파일 개수 res={}",res);
+		
+		return res;
+	}
+	
+	@RequestMapping("/realTimeChat")
+	public Object realTimeChat() {
+		logger.info("실시간 채팅");
+		
+		return "chatting/realTimeChat";
 	}
 	
 }

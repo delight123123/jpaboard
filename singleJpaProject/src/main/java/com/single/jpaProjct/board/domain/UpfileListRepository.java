@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UpfileListRepository extends JpaRepository<UpfileListVO, Long>{
 
+	public long countByReboardVo(ReboardVO reboardVo);
 }

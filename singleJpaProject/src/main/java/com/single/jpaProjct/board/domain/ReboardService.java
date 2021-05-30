@@ -91,4 +91,10 @@ public class ReboardService {
 	public UpfileListVO fileOneSel(Long no) {
 		return upfileListRepository.findById(no).get();
 	}
+	
+	public long fileimg(Long reboardNo) {
+		ReboardVO reboardVo=new ReboardVO();
+		reboardVo.setReboardNo(reboardNo);
+		return upfileListRepository.countByReboardVo(reboardVo);
+	}
 }
