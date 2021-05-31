@@ -26,7 +26,7 @@ public class PaymentService {
 		String keyword=searchVo.getSearchKeyword();
 		
 		Pageable paging
-		=PageRequest.of(searchVo.getCurrentPage(),Utility.BLOCK_SIZE 
+		=PageRequest.of(searchVo.getCurrentPage()-1,Utility.BLOCK_SIZE 
 				,  Sort.Direction.DESC, "paymentNo");
 
 		Page<PaymentVO> page=Page.empty();

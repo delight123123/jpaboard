@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%> <%@include file="inc/mainTop.jsp" %>
 		value="${pagingInfo.currentPage }" id="aa3">
 
 </form>
-<c:set var="toDay" value="<%=new java.util.Date()%>"/>
+
 
 <div class="content-wrapper">
 	<div class="card">
@@ -54,27 +54,9 @@ pageEncoding="UTF-8"%> <%@include file="inc/mainTop.jsp" %>
 											<c:if test="${a<vo.step }">
 												<img src="<c:url value='/resources/images/re.gif'/>">
 											</c:if>
-										</c:forEach> <script type="text/javascript">
-							var no=${vo.reboardNo};
-							$(function(){
-								$.ajax({
-									type: "POST", 
-									url:"<c:url value='/fileimg'/>",
-									data: {
-										reboardNo : no
-									},
-									success:function(res){
-										if(res>0){
-											'<img src="<c:url value="/resources/images/file.gif"/>" >'
-										}
-									},
-									error:function(xhr,status,error){
-										alert("Error : "+status+", "+error);
-									}
-								})
-							});
-							
-							</script> <a href="<c:url value='/readCnt?reNo=${vo.reboardNo }'/>">
+											
+										</c:forEach> 
+										<a href="<c:url value='/readCnt?reNo=${vo.reboardNo }'/>">
 											<!-- 제목이 긴 경우 일부만 보여주기--> <c:if
 												test="${fn:length(vo.reboardTitle)>30}">
 									${fn:substring(vo.reboardTitle, 0,30)}...
@@ -86,6 +68,10 @@ pageEncoding="UTF-8"%> <%@include file="inc/mainTop.jsp" %>
 									<fmt:parseDate var="regDay_D" value="${vo.reboardReg }"  pattern="yyyy-MM-dd"/>
 									<fmt:parseNumber var="toDay_N" value="${toDay_D.time / (1000*60*60*24)}" integerOnly="true" />
 									<fmt:parseNumber var="regDay_N" value="${regDay_D.time / (1000*60*60*24)}" integerOnly="true" /> 
+									<c:if test="${upfileCount[vo.reboardNo]>0 }">
+										<img src='<c:url value='/resources/images/file.gif'/>' >
+									</c:if>
+									
 									<c:if
 											test="${(today_N - regDay_N)<24 }">
 											<img src="<c:url value='/resources/images/new.gif'/>"

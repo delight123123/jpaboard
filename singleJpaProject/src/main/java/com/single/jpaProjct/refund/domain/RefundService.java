@@ -40,7 +40,7 @@ public class RefundService {
 	public Page<RefundVO> refundSearch(SearchVO searchVo) {
 		String keyword = searchVo.getSearchKeyword();
 
-		Pageable paging = PageRequest.of(searchVo.getCurrentPage(), 
+		Pageable paging = PageRequest.of(searchVo.getCurrentPage()-1, 
 				Utility.BLOCK_SIZE, Sort.Direction.DESC, "refundNo");
 
 		Page<RefundVO> page = Page.empty();

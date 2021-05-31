@@ -6,7 +6,7 @@
 	<div class="card">
 		<div class="card-body">
             <div>
-            <form name="write" id="fileform" method="post" action="" enctype="multipart/form-data">
+            <form name="write" id="fileform" method="post" action="<c:url value='/boardUpdate'/>" enctype="multipart/form-data">
 				<fieldset>
 					<div id="aa">
 						<label for="title" >제목</label>
@@ -17,14 +17,9 @@
 						<textarea id="content" name="reboardContent" rows="12" cols="40" class="form-control form-control-fw">${vo.reboardContent }</textarea>
 					</div>
 					<div id="lastdiv">
-						<button type="button" class="btn btn-gradient-danger btn-rounded btn-fw" id="bfsub">수정</button>
+						<button type="submit" class="btn btn-gradient-danger btn-rounded btn-fw" id="bfsub">수정</button>
 					</div>
-				</fieldset>
-			</form>
-			</div>
-		<form id="upfileform" method="post" action="" enctype="multipart/form-data">
-			<fieldset>
-			<input type="text" id="insertno" name="insertno" value="${vo.reboardNo }">
+					<input type="hidden" id="reboardNo" name="reboardNo" value="${vo.reboardNo }">
 					<div id="divdiv2">
 						<label for="upfile">첨부파일<sup>(파일 새로 선택 시 이전 파일은 모두 삭제)</sup></label>
 						<input type="button" name="add" id="add" value="+"><input type="button" name="minus" id="minus" value="-">
@@ -41,8 +36,9 @@
 						
 						
 					</div>
-			</fieldset>
-		</form>
+				</fieldset>
+			</form>
+			</div>
 					
 					
 
@@ -162,7 +158,7 @@ position: fixed;
 
 
 <script type="text/javascript">
-function fileup(result) {
+/* function fileup(result) {
 	var formdata = new FormData($('#upfileform')[0]);
 	alert(result);
 	
@@ -181,8 +177,8 @@ function fileup(result) {
 		error:function(xhr,status,error){
 			alert("Error : "+status+", "+error);
 		}
-	})
-};
+	}) 
+};*/
 
 
 $(function() {
@@ -196,7 +192,7 @@ $(function() {
 		$("#overray").css("display","block");
 		$("#overray").css("height","100%");
 
-
+/* 
 			$.ajax({
 				url:"<c:url value='/boardUpdate'/>",
 				type: "POST", 
@@ -204,7 +200,7 @@ $(function() {
 				success:function(res){
 					alert("글 수정");
 					$("#insertno").val(res);
-					fileup(res);
+					//fileup(res);
 					
 				},
 				error:function(xhr,status,error){
@@ -214,7 +210,7 @@ $(function() {
 			
 			
 			});
-		
+		 */
 	});
 	
 	

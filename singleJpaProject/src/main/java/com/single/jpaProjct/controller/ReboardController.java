@@ -57,7 +57,10 @@ public class ReboardController {
 		vo.setRegisterVo(registerVo);
 		reboardService.reboardWrite(vo);
 		vo.setGroupno(vo.getReboardNo());
-		reboardService.reboardWrite(vo);
+		ReboardVO resVo=reboardService.reboardWrite(vo);
+		if(resVo.getReboardNo()>0) {
+			res=1;
+		}
 		//session.setAttribute("insertno", res);
 		if(res!=0) {
 			logger.info("게시글 등록 성공");
@@ -122,7 +125,7 @@ public class ReboardController {
 	}
 	
 	@RequestMapping("/detail")
-	public Object detail(@RequestParam("reboardNo") int reboardNo, Model model ) {
+	public Object detail(@RequestParam("reboardNo") Long reboardNo, Model model ) {
 		logger.info("게시글 상세보기 파라미터 reboardNo={}",reboardNo);
 		
 		ReboardVO vo=reboardService.reboardSelByNo(reboardNo);
@@ -145,7 +148,7 @@ public class ReboardController {
 	}
 	
 	@RequestMapping("/edit")
-	public Object edit(@RequestParam("no") int reboardNo, Model model) {
+	public Object edit(@RequestParam("no") Long reboardNo, Model model) {
 		logger.info("게시글 수정 파라미터 reboardNo={}",reboardNo);
 		
 		ReboardVO vo= reboardService.reboardSelByNo(reboardNo);
@@ -165,7 +168,15 @@ public class ReboardController {
 		
 		logger.info("글 수정 파라미터 reboardVo={}",reboardVo);
 		
-		ReboardVO vo=reboardService.reboardWrite(reboardVo);
+		ReboardVO vo=reboardService.reboardSelByNo(reboardVo.getReboardNo());
+		vo.setReboardTitle(reboardVo.getReboardTitle());
+		vo.setReboardContent(reboardVo.getReboardContent());
+		
+		vo=reboardService.reboardWrite(vo);
+		if(vo.getReboardNo()>0) {
+			res=1;
+		}
+		
 		logger.info("글 수정 결과 res={}",res);
 		
 		if(res>0) {
@@ -194,7 +205,7 @@ public class ReboardController {
 	}
 	
 	@RequestMapping("/delete")
-	public Object reboardDel(@RequestParam("no") int reboardNo,HttpSession session
+	public Object reboardDel(@RequestParam("no") Long reboardNo,HttpSession session
 			,HttpServletRequest request,Model model) {
 		logger.info("게시물 삭제 파라미터 no={}",reboardNo);
 		
@@ -203,7 +214,8 @@ public class ReboardController {
 		
 		int res=0;
 		
-		res=reboardService.reboardDel(vo.getReboardNo()
+		res=-1;
+				reboardService.reboardDel(vo.getReboardNo()
 				,vo.getGroupno(),vo.getStep());
 		
 		logger.info("게시글 삭제 결과 res={}",res);
@@ -258,7 +270,7 @@ public class ReboardController {
 	}
 	
 	@RequestMapping(value = "/reply", method = RequestMethod.GET)
-	public Object replayGet(@RequestParam int no,Model model) {
+	public Object replayGet(@RequestParam Long no,Model model) {
 		logger.info("답글 달기 화면 보이기 파라미터 no={}",no);
 		
 		ReboardVO vo=reboardService.reboardSelByNo(no);

@@ -47,13 +47,13 @@ public class RegisterService {
 
 		if(type==Utility.NONEWDWTYPE) {
 			Pageable paging
-			=PageRequest.of(searchVo.getCurrentPage(),Utility.BLOCK_SIZE 
+			=PageRequest.of(searchVo.getCurrentPage()-1,Utility.BLOCK_SIZE 
 					,  Sort.Direction.DESC, "userid");
 			
 			page=registerRepository.findByUseridNotAndOutDateNull(userid, paging);
 		}else if(type==Utility.WDWTYPE) {
 			Pageable paging
-			=PageRequest.of(searchVo.getCurrentPage2(),Utility.BLOCK_SIZE 
+			=PageRequest.of(searchVo.getCurrentPage2()-1,Utility.BLOCK_SIZE 
 					,  Sort.Direction.DESC, "userid");
 			page=registerRepository.findByUseridNotAndOutDateNotNull(userid, paging);
 		}

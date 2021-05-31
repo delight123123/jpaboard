@@ -11,13 +11,14 @@ import com.single.jpaProjct.register.domain.RegisterVO;
 
 public interface ReboardRepository extends JpaRepository<ReboardVO, Long>{
 
-	public Page<ReboardVO> findByReboardTitleContaining(String reboardTitle, Pageable paging);
-	public Page<ReboardVO> findByReboardContentContaining(String reboardContent, Pageable paging);
+	public Page<ReboardVO> findByReboardTitleContainingOrderByGroupnoDesc(String reboardTitle, Pageable paging);
+	public Page<ReboardVO> findByReboardContentContainingOrderByGroupnoDesc(String reboardContent, Pageable paging);
 	//public Page<ReboardVO> findByRegisterVoContaining(ReboardVO vo, Pageable paging);
-	public Page<ReboardVO> findAllByRegisterVo(RegisterVO vo, Pageable paging);
+	public Page<ReboardVO> findAllByRegisterVoOrderByGroupnoDesc(RegisterVO vo, Pageable paging);
+	public Page<ReboardVO> findAllByOrderByGroupnoDesc(Pageable paging);
 	@Transactional
 	@Procedure(procedureName = "delete_reboard")
-	public int delProcedure(@Param("p_no") Long no
+	public void delProcedure(@Param("p_no") Long no
 			,@Param("p_groupno") Long groupno
 			,@Param("p_step") Long step);
 }

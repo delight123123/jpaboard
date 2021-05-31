@@ -1,8 +1,11 @@
 package com.single.jpaProjct.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +40,16 @@ public class MainController {
 		
 		Page<ReboardVO> page=reboardService.mainSel(searchVo);
 		
-		List<ReboardVO> list=page.getContent().stream().collect(Collectors.toList());
+		List<ReboardVO> list=page.getContent();
+		
+		if(list.size()>0) {
+			Map<Long, Long> upfileCount=new HashedMap<>();		
+			list.stream().forEach(vo -> upfileCount.put(vo.getReboardNo(),reboardService.fileimg(vo.getReboardNo())));
+			
+			model.addAttribute("upfileCount", upfileCount);
+		}
+		
+		
 		PaginationInfo pagingInfo=new PaginationInfo();
 		pagingInfo.setBlockSize(Utility.BLOCK_SIZE);
 		pagingInfo.setRecordCountPerPage(Utility.RECORD_COUNT);
@@ -54,19 +66,24 @@ public class MainController {
 		logger.info("pagingInfo={}",pagingInfo);
 		
 		logger.info("list={}",list.toString());
-		logger.info("list.size()={}",list.size());
-		logger.info("list.userid={}",list.get(0).getRegisterVo().getUserid());
+		
+		logger.info("list.size={}",list.size());
+		
+		Date date=new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		logger.info("date={}",sdf.format(date));
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
-		
+		model.addAttribute("toDay", sdf.format(date));
 		
 		return "Main";
 	}
 	
 	@ResponseBody
 	@RequestMapping("/fileimg")
-	public long fileimg(@RequestParam("reboardNo") Long reboardNo) {
-		long res=0;
+	public Long fileimg(@RequestParam("reboardNo") Long reboardNo) {
+		Long res=0L;
 		logger.info("파일 이미지 유무 파라미터 reboardNo={}",reboardNo);
 		
 		res=reboardService.fileimg(reboardNo);
