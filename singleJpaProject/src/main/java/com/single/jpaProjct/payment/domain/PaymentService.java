@@ -31,10 +31,10 @@ public class PaymentService {
 
 		Page<PaymentVO> page=Page.empty();
 		
-		if(keyword.isEmpty() || keyword==null) {
+		if(!keyword.isEmpty() && keyword!=null) {
 			DateTimeFormatter dtf=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			LocalDateTime start=LocalDateTime.parse(keyword+"00:00:00", dtf);
-			LocalDateTime end=LocalDateTime.parse(keyword+"23:59:59", dtf);
+			LocalDateTime start=LocalDateTime.parse(keyword+" 00:00:00", dtf);
+			LocalDateTime end=LocalDateTime.parse(keyword+" 23:59:59", dtf);
 			
 			page=paymentRepository.findAllByRegisterVoAndPaymentRegBetween(vo,
 					Timestamp.valueOf(start), Timestamp.valueOf(end),

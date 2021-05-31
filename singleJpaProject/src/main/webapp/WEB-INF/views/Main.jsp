@@ -73,7 +73,7 @@ pageEncoding="UTF-8"%> <%@include file="inc/mainTop.jsp" %>
 									</c:if>
 									
 									<c:if
-											test="${(today_N - regDay_N)<24 }">
+											test="${(today_N - regDay_N)<1 }">
 											<img src="<c:url value='/resources/images/new.gif'/>"
 												alt="new 이미지">
 										</c:if></td>

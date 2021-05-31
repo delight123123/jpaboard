@@ -1,6 +1,8 @@
 package com.single.jpaProjct.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -110,10 +112,14 @@ public class PaymentController {
 		
 		logger.info("pagingInfo={}",pagingInfo);
 		
+		Date date=new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		logger.info("date={}",sdf.format(date));
+		
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
-		
+		model.addAttribute("toDay", sdf.format(date));
 		
 		return "payment/paymentList";
 	}

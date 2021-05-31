@@ -49,34 +49,34 @@
 							</tr>
 						</c:if>
 						<c:if test="${!empty list }">
-							<c:forEach var="map" items="${list }">
+							<c:forEach var="vo" items="${list }">
 								<tr>
-									<td>${map['USERID'] }</td>
-									<td>${map['REFUND_REASON'] }</td>
+									<td>${vo.paymentVo.registerVo.userid }</td>
+									<td>${vo.refundReason }</td>
 									<td>
-										<c:if test="${map['REFUND_TYPE']=='all' }">전액</c:if>
-										<c:if test="${map['REFUND_TYPE']=='part' }">부분</c:if>
+										<c:if test="${vo.refundType=='all' }">전액</c:if>
+										<c:if test="${vo.refundType=='part' }">부분</c:if>
 									</td>
 									<td>
-										<fmt:formatNumber value="${map['REFUND_PRICE'] }" pattern="#,###" /> 원
+										<fmt:formatNumber value="${vo.refundPrice }" pattern="#,###" /> 원
 									</td>
-									<td><fmt:formatDate value="${map['REPORTING_DATE'] }" pattern="yyyy-MM-dd"/> </td>
-									<td>${map['REFUND_STATE'] }</td>
+									<td><fmt:formatDate value="${vo.reportingDate }" pattern="yyyy-MM-dd"/> </td>
+									<td>${vo.refundState }</td>
 									
 									<td>
-									<c:if test="${!empty map['REFUND_DATE'] }">
-										<fmt:formatDate value="${map['REFUND_DATE'] }" pattern="yyyy-MM-dd"/>
+									<c:if test="${!empty vo.refundDate}">
+										<fmt:formatDate value="${vo.refundDate }" pattern="yyyy-MM-dd"/>
 									</c:if>
-									<c:if test="${empty map['REFUND_DATE'] }">
+									<c:if test="${empty vo.refundDate }">
 									-
 									</c:if>
 									 </td>
 									<td>
-									<c:if test="${map['REFUND_STATE']=='N' }">
+									<c:if test="${vo.refundState=='N' }">
 										<input type="button" value="환불" class="refundGo">
-										<input type="text" value="${map['REFUND_NO'] }">
+										<input type="text" value="${vo.refundNo }">
 									</c:if>
-									<c:if test="${map['REFUND_STATE']=='Y' }">
+									<c:if test="${vo.refundState=='Y' }">
 										환불완료
 									</c:if>
 									</td>

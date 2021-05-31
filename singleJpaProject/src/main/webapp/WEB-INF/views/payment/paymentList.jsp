@@ -42,26 +42,30 @@
 							</tr>
 						</c:if>
 						<c:if test="${!empty list }">
-							<c:forEach var="map" items="${list }">
+							<c:forEach var="vo" items="${list }">
 								<tr>
-									<td>${map['ORDERNAME'] }</td>
-									<td><fmt:formatNumber pattern="#,###" value="${map['PRICE'] }" /> 원</td>
-									<td><fmt:formatDate value="${map['PAYMENT_REG'] }" pattern="yyyy-MM-dd"/></td>
+									<td>${vo.ordername }</td>
+									<td><fmt:formatNumber pattern="#,###" value="${vo.price }" /> 원</td>
+									<td><fmt:formatDate value="${vo.paymentReg }" pattern="yyyy-MM-dd"/></td>
 									<td>
+									<fmt:parseDate var="toDay_D"  value="${toDay }" pattern="yyyy-MM-dd"/>
+									<fmt:parseDate var="regDay_D" value="${vo.paymentReg }"  pattern="yyyy-MM-dd"/>
+									<fmt:parseNumber var="toDay_N" value="${toDay_D.time / (1000*60*60*24)}" integerOnly="true" />
+									<fmt:parseNumber var="regDay_N" value="${regDay_D.time / (1000*60*60*24)}" integerOnly="true" />
 										<c:choose>
-											<c:when test="${map['ABLEDATE']>(24*14) }" >구매 확정</c:when>
+											<c:when test="${(toDay_N-regDay_N)>(24*14) }" >구매 확정</c:when>
 											<c:otherwise>
-												<c:if test="${empty map['REFUND_NO'] }">
+												<c:if test="${empty vo.refundVo.refundNo }">
 													<input type="button" value="환불하기" class="refundGo">
-													<input type="hidden" value="${map['IMP_UID'] }">
+													<input type="hidden" value="${vo.impUid }">
 												</c:if>
-												<c:if test="${!empty map['REFUND_NO'] }">
-													<c:if test="${map['REFUND_STATE']=='N' }">
+												<c:if test="${!empty vo.refundVo.refundNo }">
+													<c:if test="${vo.refundVo.refundState=='N' }">
 														<input type="button" value="환불 취소" class="refundCancel">
-														<input type="hidden" value="${map['REFUND_NO'] }">
+														<input type="hidden" value="${vo.refundVo.refundNo }">
 														환불 진행중
 													</c:if>
-													<c:if test="${map['REFUND_STATE']=='Y' }">
+													<c:if test="${vo.refundVo.refundState=='Y' }">
 														환불 완료
 													</c:if>
 												</c:if>

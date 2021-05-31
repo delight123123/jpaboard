@@ -105,7 +105,7 @@ public class RefundController {
 			refundVo.setRefundState("Y");
 			
 			Date date=new Date();
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			String sysdate=sdf.format(date);
 			refundVo.setRefundDate(Timestamp.valueOf(sysdate));
 			
